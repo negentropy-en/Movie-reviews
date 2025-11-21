@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+{% block content %}
+
+<h1>Search Reviews</h1>
+
+<form action="/search" method="get">
+  <p>
+    Keyword:<br />
+    <input type="text" name="query" value="{{ query or '' }}" />
+  </p>
+  <p><input type="submit" value="Search" /></p>
+</form>
+
+{% if query %}
+  <h2>Results for "{{ query }}"</h2>
+
+  {% if results %}
+    {% for review in results %}
+      <p>
+        <a href="/review/{{ review.id }}"><strong>{{ review.movie_title }}</strong></a><br />
+        {{ review.content_preview }}{% if review.content_preview|length == 200 %}...{% endif %}
+        <br />
+        by <a href="/user/{{ review.user_id }}">{{ review.username }}</a>
+        ({{ review.created_at }})
+      </p>
+      <hr />
+    {% endfor %}
+  {% else %}
+    <p>No reviews found.</p>
+  {% endif %}
+{% endif %}
+
+{% endblock %}

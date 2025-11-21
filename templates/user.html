@@ -1,0 +1,32 @@
+{% extends "base.html" %}
+{% block content %}
+
+<h1>User: {{ user.username }}</h1>
+
+{% if stats %}
+  <p>
+    Number of reviews: {{ stats.count }}<br />
+    First review: {{ stats.first_review if stats.first_review else "-" }}<br />
+    Most recent review: {{ stats.last_review if stats.last_review else "-" }}
+  </p>
+{% else %}
+  <p>No statistics available.</p>
+{% endif %}
+
+<h2>Reviews by {{ user.username }}</h2>
+
+{% if reviews %}
+  {% for review in reviews %}
+    <p>
+      <a href="/review/{{ review.id }}"><strong>{{ review.movie_title }}</strong></a><br />
+      Created: {{ review.created_at }}<br />
+      Comments: {{ review.comment_count }} |
+      Average rating: {{ review.avg_rating if review.avg_rating is not none else "-" }}
+    </p>
+    <hr />
+  {% endfor %}
+{% else %}
+  <p>This user has not added any reviews yet.</p>
+{% endif %}
+
+{% endblock %}

@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+{% block content %}
+
+<h1>Delete Review</h1>
+
+<p>Are you sure you want to delete the review for "<strong>{{ review.movie_title }}</strong>"?</p>
+
+<form action="/review/{{ review.id }}/delete" method="post">
+  <input type="hidden" name="confirm" value="yes" />
+  <input type="hidden" name="csrf_token" value="{{ session.csrf_token }}" />
+  <p>
+    <input type="submit" value="Delete review" />
+  </p>
+</form>
+
+{% endblock %}

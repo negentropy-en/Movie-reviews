@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+{% block content %}
+
+<h1>New Movie Review</h1>
+
+<form action="/review/new" method="post">
+  <p>
+    Movie title:<br />
+    <input type="text" name="movie_title" />
+  </p>
+  <p>
+    Review text:<br />
+    <textarea name="content" rows="5" cols="40"></textarea>
+  </p>
+
+  <p>
+    Classifications (choose one or more):<br />
+    {% for c in categories %}
+      <label>
+        <input type="checkbox" name="category_ids" value="{{ c.id }}" />
+        {{ c.name }}
+      </label><br />
+    {% endfor %}
+  </p>
+
+  <input type="hidden" name="csrf_token" value="{{ session.csrf_token }}" />
+
+  <p><input type="submit" value="Save review" /></p>
+</form>
+
+{% endblock %}

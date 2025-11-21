@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+{% block content %}
+
+<h1>All Movie Reviews</h1>
+
+{% if session.user_id %}
+  <p><a href="/review/new">Add a new movie review</a></p>
+{% else %}
+  <p><a href="/login">Log in</a> to add your own reviews.</p>
+{% endif %}
+
+{% if reviews %}
+  {% for review in reviews %}
+    <p>
+      <a href="/review/{{ review.id }}"><strong>{{ review.movie_title }}</strong></a><br />
+      {{ review.content_preview }}{% if review.content_preview|length == 200 %}...{% endif %}
+      <br />
+      by <a href="/user/{{ review.user_id }}">{{ review.username }}</a>
+      ({{ review.created_at }})<br />
+      Comments: {{ review.comment_count }} |
+      Average rating: {{ review.avg_rating if review.avg_rating is not none else "-" }}
+    </p>
+    <hr />
+  {% endfor %}
+{% else %}
+  <p>No reviews yet.</p>
+{% endif %}
+
+{% endblock %}

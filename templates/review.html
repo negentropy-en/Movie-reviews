@@ -1,0 +1,80 @@
+{% extends "base.html" %}
+{% block content %}
+
+<h1>{{ review.movie_title }}</h1>
+
+<p>
+  by <a href="/user/{{ review.user_id }}">{{ review.username }}</a>
+  ({{ review.created_at }})
+</p>
+
+<p>{{ review.content }}</p>
+
+<p>
+  Classifications:
+  {% if categories %}
+    {% for c in categories %}
+      {{ c.name }}{% if not loop.last %}, {% endif %}
+    {% endfor %}
+  {% else %}
+    none
+  {% endif %}
+</p>
+
+<p>
+  Number of comments: {{ review.comment_count }}<br />
+  Average rating: {{ review.avg_rating if review.avg_rating is not none else "-" }}
+</p>
+
+{% if session.user_id == review.user_id %}
+  <p>
+    <a href="/review/{{ review.id }}/edit">Edit review</a> |
+    <a href="/review/{{ review.id }}/delete">Delete review</a>
+  </p>
+{% endif %}
+
+<hr />
+
+<h2>Comments</h2>
+
+{% if comments %}
+  {% for comment in comments %}
+    <p>
+      <strong>{{ comment.username }}</strong> ({{ comment.created_at }}):<br />
+      Rating: {{ comment.rating }}/5<br />
+      {{ comment.content }}
+    </p>
+    {% if session.user_id == comment.user_id %}
+      <p>
+        <a href="/comment/{{ comment.id }}/edit">Edit comment</a> |
+        <a href="/comment/{{ comment.id }}/delete">Delete comment</a>
+      </p>
+    {% endif %}
+    <hr />
+  {% endfor %}
+{% else %}
+  <p>No comments yet.</p>
+{% endif %}
+
+{% if session.user_id %}
+  <h3>Add a new comment</h3>
+  <form action="/comment/new" method="post">
+    <p>
+      Rating (1–5):<br />
+      <input type="number" name="rating" min="1" max="5" />
+    </p>
+    <p>
+      Comment:<br />
+      <textarea name="content" rows="4" cols="40"></textarea>
+    </p>
+
+    <input type="hidden" name="review_id" value="{{ review.id }}" />
+    <input type="hidden" name="csrf_token" value="{{ session.csrf_token }}" />
+
+    <p><input type="submit" value="Send comment" /></p>
+  </form>
+{% else %}
+  <p><a href="/login">Log in</a> to comment.</p>
+{% endif %}
+
+{% endblock %}

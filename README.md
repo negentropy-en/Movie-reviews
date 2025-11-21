@@ -29,4 +29,35 @@ This project was built to satisfy the course requirements:
 The language of the application's user interface and README.md file is English. The language of the technical implementation of the application (code, database, commit messages) is English.
 
 ## Installation (and other parts as well)
-- tbd...
+
+### Clone the repository
+```bash
+git clone <repo-url>
+cd movie_reviews
+```
+### Create a virtual environment
+```bash
+python -m venv venv
+```
+### Activate it
+On Windows (Git Bash/PowerShell)
+```bash
+source venv/Scripts/activate
+```
+On macOS/Linux
+```bash
+source venv/bin/activate
+```
+
+### Install dependencies
+```bash
+pip install flask
+```
+### Initialize the database
+```bash
+sqlite3 database.db < schema.sql
+```
+### Run the application
+```bash
+flask run
+```

@@ -3,6 +3,10 @@
 
 <h1>Edit Movie Review</h1>
 
+{% if error %}
+  <p class="error-msg">{{ error }}</p>
+{% endif %}
+
 <form action="/review/{{ review.id }}/edit" method="post">
   <p>
     Movie title:<br />

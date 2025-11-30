@@ -3,21 +3,26 @@
 
 <h1>New Movie Review</h1>
 
+{% if error %}
+  <p class="error-msg">{{ error }}</p>
+{% endif %}
+
 <form action="/review/new" method="post">
   <p>
     Movie title:<br />
-    <input type="text" name="movie_title" />
+    <input type="text" name="movie_title" value="{{ movie_title or '' }}" />
   </p>
   <p>
     Review text:<br />
-    <textarea name="content" rows="5" cols="40"></textarea>
+    <textarea name="content" rows="5" cols="40">{{ content or '' }}</textarea>
   </p>
 
   <p>
     Classifications (choose one or more):<br />
     {% for c in categories %}
       <label>
-        <input type="checkbox" name="category_ids" value="{{ c.id }}" />
+        <input type="checkbox" name="category_ids" value="{{ c.id }}" 
+               {% if selected_ids and c.id|string in selected_ids %}checked{% endif %} />
         {{ c.name }}
       </label><br />
     {% endfor %}

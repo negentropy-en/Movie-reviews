@@ -1,6 +1,10 @@
 {% extends "base.html" %}
 {% block content %}
 
+{% if error %}
+  <p class="error-msg">{{ error }}</p>
+{% endif %}
+
 <h1>{{ review.movie_title }}</h1>
 
 <p>
@@ -8,7 +12,7 @@
   ({{ review.created_at }})
 </p>
 
-<p>{{ review.content }}</p>
+<div class="content-text">{{ review.content }}</div>
 
 <p>
   Classifications:
@@ -39,11 +43,11 @@
 
 {% if comments %}
   {% for comment in comments %}
-    <p>
+    <div>
       <strong>{{ comment.username }}</strong> ({{ comment.created_at }}):<br />
       Rating: {{ comment.rating }}/5<br />
-      {{ comment.content }}
-    </p>
+      <div class="content-text">{{ comment.content }}</div>
+    </div>
     {% if session.user_id == comment.user_id %}
       <p>
         <a href="/comment/{{ comment.id }}/edit">Edit comment</a> |
@@ -65,7 +69,7 @@
     </p>
     <p>
       Comment:<br />
-      <textarea name="content" rows="4" cols="40"></textarea>
+      <textarea name="content" rows="4" cols="40">{{ comment_text or '' }}</textarea>
     </p>
 
     <input type="hidden" name="review_id" value="{{ review.id }}" />

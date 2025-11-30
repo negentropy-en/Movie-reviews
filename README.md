@@ -33,7 +33,7 @@ The language of the application's user interface and README.md file is English. 
 ### Clone the repository
 ```bash
 git clone <repo-url>
-cd movie_reviews
+cd movie-reviews
 ```
 ### Create a virtual environment
 ```bash

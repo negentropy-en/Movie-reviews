@@ -3,6 +3,10 @@
 
 <h1>Edit Comment</h1>
 
+{% if error %}
+  <p class="error-msg">{{ error }}</p>
+{% endif %}
+
 <form action="/comment/{{ comment.id }}/edit" method="post">
   <p>
     Rating (1–5):<br />

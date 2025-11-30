@@ -3,14 +3,17 @@
 
 <h1>Delete Review</h1>
 
+{% if error %}
+  <p class="error-msg">{{ error }}</p>
+{% endif %}
+
 <p>Are you sure you want to delete the review for "<strong>{{ review.movie_title }}</strong>"?</p>
 
-<form action="/review/{{ review.id }}/delete" method="post">
+<form action="/review/{{ review.id }}/delete" method="post" style="display:inline;">
   <input type="hidden" name="confirm" value="yes" />
   <input type="hidden" name="csrf_token" value="{{ session.csrf_token }}" />
-  <p>
-    <input type="submit" value="Delete review" />
-  </p>
+  <input type="submit" value="Delete review" />
 </form>
+&nbsp; <a href="/review/{{ review.id }}">Cancel</a>
 
 {% endblock %}

@@ -1,5 +1,5 @@
 import secrets
-from flask import Flask, redirect, render_template, request, session, abort
+from flask import Flask, redirect, render_template, request, session, abort, flash
 
 import config
 import users
@@ -56,6 +56,8 @@ def create_user():  # Handling user registration
     error = users.create_user(username, password1, password2)
     if error:
         return render_template("register.html", error=error, username=username)
+    
+    flash("Account created successfully. Please log in.", "success")
     
     return redirect("/login")
 

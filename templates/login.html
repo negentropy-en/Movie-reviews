@@ -4,22 +4,24 @@
 <h1>Log in</h1>
 
 {% if error %}
-  <p class="error-msg">{{ error }}</p>
+  <p class="error">{{ error }}</p>
 {% endif %}
 
-<form action="/login" method="post">
-  <p>
-    Username:<br />
-    <input type="text" name="username" value="{{ username or '' }}" />
-  </p>
-  <p>
-    Password:<br />
-    <input type="password" name="password" />
-  </p>
+<form action="/login" method="post" class="form">
+  <fieldset>
+    <label>Username</label>
+    <input type="text" name="username" value="{{ username or '' }}" required />
+  </fieldset>
+  <fieldset>
+    <label>Password</label>
+    <input type="password" name="password" required />
+  </fieldset>
 
   <input type="hidden" name="csrf_token" value="{{ session.csrf_token }}" />
 
-  <p><input type="submit" value="Log in" /></p>
+  <div class="btn-row">
+    <input type="submit" value="Log in" class="btn-primary" />
+  </div>
 </form>
 
 {% endblock %}

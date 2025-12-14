@@ -3,27 +3,32 @@
 
 <h1>Search Reviews</h1>
 
-<form action="/search" method="get">
-  <p>
-    Keyword:<br />
-    <input type="text" name="query" value="{{ query or '' }}" />
-  </p>
-  <p><input type="submit" value="Search" /></p>
+<form action="/search" method="get" class="form">
+  <fieldset>
+    <label>Keyword</label>
+    <input type="text" name="query" value="{{ query or '' }}">
+  </fieldset>
+  <div class="btn-row">
+    <input type="submit" value="Search" class="btn-primary">
+  </div>
 </form>
 
 {% if query %}
-  <h2>Results for "{{ query }}"</h2>
+  <h2 style="margin-top:1rem;">Results for "{{ query }}"</h2>
 
   {% if results %}
     {% for review in results %}
-      <p>
-        <a href="/review/{{ review.id }}"><strong>{{ review.movie_title }}</strong></a><br />
-        {{ review.content_preview }}{% if review.content_preview|length == 200 %}...{% endif %}
-        <br />
-        by <a href="/user/{{ review.user_id }}">{{ review.username }}</a>
-        ({{ review.created_at }})
-      </p>
-      <hr />
+      <div class="block">
+        <p>
+          <a href="/review/{{ review.id }}"><strong>{{ review.movie_title }}</strong></a><br>
+          {{ review.content_preview }}{% if review.content_preview|length == 200 %}...{% endif %}
+        </p>
+        <p class="muted">
+          by <a href="/user/{{ review.user_id }}">{{ review.username }}</a>
+          ({{ review.created_at }})
+        </p>
+      </div>
+      {% if not loop.last %}<hr>{% endif %}
     {% endfor %}
   {% else %}
     <p>No reviews found.</p>

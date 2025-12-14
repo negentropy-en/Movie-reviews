@@ -4,26 +4,28 @@
 <h1>Register</h1>
 
 {% if error %}
-  <p class="error-msg">{{ error }}</p>
+  <p class="error">{{ error }}</p>
 {% endif %}
 
-<form action="/create_user" method="post">
-  <p>
-    Username:<br />
-    <input type="text" name="username" value="{{ username or '' }}" />
-  </p>
-  <p>
-    Password:<br />
-    <input type="password" name="password1" />
-  </p>
-  <p>
-    Repeat password:<br />
-    <input type="password" name="password2" />
-  </p>
+<form action="/create_user" method="post" class="form">
+  <fieldset>
+    <label>Username</label>
+    <input type="text" name="username" value="{{ username or '' }}" required />
+  </fieldset>
+  <fieldset>
+    <label>Password</label>
+    <input type="password" name="password1" required />
+  </fieldset>
+  <fieldset>
+    <label>Repeat password</label>
+    <input type="password" name="password2" required />
+  </fieldset>
 
   <input type="hidden" name="csrf_token" value="{{ session.csrf_token }}" />
 
-  <p><input type="submit" value="Create account" /></p>
+  <div class="btn-row">
+    <input type="submit" value="Create account" class="btn-primary" />
+  </div>
 </form>
 
 {% endblock %}

@@ -1,0 +1,82 @@
+/* Part 10 style from lecture material, for simpler outlook; according to course material (could've done more changes to styling to enhance the appearance, but decided to stick to course material) */
+
+body {
+  margin: auto;
+  max-width: 50em;
+  font-family: sans-serif;
+  background-color: lightblue;
+}
+
+.header {
+  background-color: black;
+  color: red;
+  padding: 1em;
+  margin: 0.5em 0;
+}
+
+.nav {
+  background-color: lightgrey;
+  padding: 0.5em;
+  margin: 0.5em 0;
+}
+
+.content {
+  background-color: white;
+  padding: 1em;
+  margin: 0.5em 0;
+}
+
+h1, h2 {
+  margin: 0;
+}
+
+nav { text-align: center; }
+
+nav ul {
+  padding: 0;
+  margin: 0;
+}
+
+nav li {
+  display: inline-block;
+  padding: 0 1em;
+  margin: 0;
+}
+
+nav li:not(:last-of-type) {
+  border-right: 1px solid black;
+}
+
+nav li:not(:first-of-type) {
+  margin-left: -0.25em;
+}
+
+.linklike {
+  background: none;
+  border: none;
+  padding: 0;
+  margin: 0;
+  font: inherit;
+  color: inherit;
+  text-decoration: underline;
+  cursor: pointer;
+}
+
+.thread {
+  border: 2px solid black;
+  margin: 1em;
+  padding: 0.2em 0.5em;
+}
+
+.info {
+  border: 2px solid black;
+  margin: 1em;
+  padding: 0.5em;
+  background-color: blue;
+  color: white;
+}
+
+.content-text {
+  white-space: pre-wrap;
+  word-wrap: break-word;
+}

@@ -4,33 +4,36 @@
 <h1>New Movie Review</h1>
 
 {% if error %}
-  <p class="error-msg">{{ error }}</p>
+  <p class="error">{{ error }}</p>
 {% endif %}
 
-<form action="/review/new" method="post">
-  <p>
-    Movie title:<br />
-    <input type="text" name="movie_title" value="{{ movie_title or '' }}" />
-  </p>
-  <p>
-    Review text:<br />
-    <textarea name="content" rows="5" cols="40">{{ content or '' }}</textarea>
-  </p>
+<form action="/review/new" method="post" class="form">
+  <fieldset>
+    <label>Movie title</label>
+    <input type="text" name="movie_title" value="{{ movie_title or '' }}" required />
+  </fieldset>
 
-  <p>
-    Classifications (choose one or more):<br />
+  <fieldset>
+    <label>Review text</label>
+    <textarea name="content" rows="5" required>{{ content or '' }}</textarea>
+  </fieldset>
+
+  <fieldset class="checklist">
+    <label>Classifications (choose one or more)</label>
     {% for c in categories %}
       <label>
-        <input type="checkbox" name="category_ids" value="{{ c.id }}" 
+        <input type="checkbox" name="category_ids" value="{{ c.id }}"
                {% if selected_ids and c.id|string in selected_ids %}checked{% endif %} />
         {{ c.name }}
-      </label><br />
+      </label>
     {% endfor %}
-  </p>
+  </fieldset>
 
   <input type="hidden" name="csrf_token" value="{{ session.csrf_token }}" />
 
-  <p><input type="submit" value="Save review" /></p>
+  <div class="btn-row">
+    <input type="submit" value="Save review" class="btn-primary" />
+  </div>
 </form>
 
 {% endblock %}

@@ -80,3 +80,11 @@ nav li:not(:first-of-type) {
   white-space: pre-wrap;
   word-wrap: break-word;
 }
+
+.error {
+  border: 2px solid black;
+  margin: 1em;
+  padding: 0.5em;
+  background-color: #ffcccc;
+  color: black;
+}

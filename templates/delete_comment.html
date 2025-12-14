@@ -4,18 +4,20 @@
 <h1>Delete Comment</h1>
 
 {% if error %}
-  <p class="error-msg">{{ error }}</p>
+  <p class="error">{{ error }}</p>
 {% endif %}
 
-<p>Are you sure you want to delete this comment?</p>
+<p><strong>Comment preview</strong></p>
+<div class="content-text block">{{ comment.content }}</div>
 
-<p class="content-text">{{ comment.content }}</p>
+<form action="/comment/{{ comment.id }}/delete" method="post" class="form">
+  <input type="hidden" name="confirm" value="yes">
+  <input type="hidden" name="csrf_token" value="{{ session.csrf_token }}">
 
-<form action="/comment/{{ comment.id }}/delete" method="post" style="display:inline;">
-  <input type="hidden" name="confirm" value="yes" />
-  <input type="hidden" name="csrf_token" value="{{ session.csrf_token }}" />
-  <input type="submit" value="Delete comment" />
+  <div class="btn-row">
+    <input type="submit" value="Delete comment" class="btn-danger">
+    <a href="/review/{{ comment.review_id }}" class="btn-primary" style="text-decoration:none; display:inline-block; line-height:2.25rem; padding:0 14px;">Cancel</a>
+  </div>
 </form>
-&nbsp; <a href="/review/{{ comment.review_id }}">Cancel</a>
 
 {% endblock %}

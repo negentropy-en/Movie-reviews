@@ -4,33 +4,36 @@
 <h1>Edit Movie Review</h1>
 
 {% if error %}
-  <p class="error-msg">{{ error }}</p>
+  <p class="error">{{ error }}</p>
 {% endif %}
 
-<form action="/review/{{ review.id }}/edit" method="post">
-  <p>
-    Movie title:<br />
-    <input type="text" name="movie_title" value="{{ review.movie_title }}" />
-  </p>
-  <p>
-    Review text:<br />
-    <textarea name="content" rows="5" cols="40">{{ review.content }}</textarea>
-  </p>
+<form action="/review/{{ review.id }}/edit" method="post" class="form">
+  <fieldset>
+    <label>Movie title</label>
+    <input type="text" name="movie_title" value="{{ review.movie_title }}" required />
+  </fieldset>
 
-  <p>
-    Classifications:<br />
+  <fieldset>
+    <label>Review text</label>
+    <textarea name="content" rows="5" required>{{ review.content }}</textarea>
+  </fieldset>
+
+  <fieldset class="checklist">
+    <label>Classifications</label>
     {% for c in categories %}
       <label>
         <input type="checkbox" name="categories" value="{{ c.id }}"
-               {% if c.id|string in selected_ids %}checked{% endif %} />
+               {% if c.id|string in selected_ids %}checked{% endif %}>
         {{ c.name }}
-      </label><br />
+      </label>
     {% endfor %}
-  </p>
+  </fieldset>
 
   <input type="hidden" name="csrf_token" value="{{ session.csrf_token }}" />
 
-  <p><input type="submit" value="Save changes" /></p>
+  <div class="btn-row">
+    <input type="submit" value="Save changes" class="btn-primary" />
+  </div>
 </form>
 
 {% endblock %}

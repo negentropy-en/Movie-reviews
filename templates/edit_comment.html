@@ -4,23 +4,25 @@
 <h1>Edit Comment</h1>
 
 {% if error %}
-  <p class="error-msg">{{ error }}</p>
+  <p class="error">{{ error }}</p>
 {% endif %}
 
-<form action="/comment/{{ comment.id }}/edit" method="post">
-  <p>
-    Rating (1–5):<br />
-    <input type="number" name="rating" min="1" max="5"
-           value="{{ comment.rating }}" />
-  </p>
-  <p>
-    Comment:<br />
-    <textarea name="content" rows="4" cols="40">{{ comment.content }}</textarea>
-  </p>
+<form action="/comment/{{ comment.id }}/edit" method="post" class="form">
+  <fieldset>
+    <label>Rating (1–5)</label>
+    <input type="number" name="rating" min="1" max="5" value="{{ comment.rating }}" required>
+  </fieldset>
+
+  <fieldset>
+    <label>Comment</label>
+    <textarea name="content" rows="4" required>{{ comment.content }}</textarea>
+  </fieldset>
 
   <input type="hidden" name="csrf_token" value="{{ session.csrf_token }}" />
 
-  <p><input type="submit" value="Save comment" /></p>
+  <div class="btn-row">
+    <input type="submit" value="Save comment" class="btn-primary">
+  </div>
 </form>
 
 {% endblock %}

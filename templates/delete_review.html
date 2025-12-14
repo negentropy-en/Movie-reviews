@@ -4,16 +4,21 @@
 <h1>Delete Review</h1>
 
 {% if error %}
-  <p class="error-msg">{{ error }}</p>
+  <p class="error">{{ error }}</p>
 {% endif %}
 
-<p>Are you sure you want to delete the review for "<strong>{{ review.movie_title }}</strong>"?</p>
+<p class="content-text">
+  Are you sure you want to delete the review for <strong>{{ review.movie_title }}</strong>?
+</p>
 
-<form action="/review/{{ review.id }}/delete" method="post" style="display:inline;">
-  <input type="hidden" name="confirm" value="yes" />
-  <input type="hidden" name="csrf_token" value="{{ session.csrf_token }}" />
-  <input type="submit" value="Delete review" />
+<form action="/review/{{ review.id }}/delete" method="post" class="form">
+  <input type="hidden" name="confirm" value="yes">
+  <input type="hidden" name="csrf_token" value="{{ session.csrf_token }}">
+
+  <div class="btn-row">
+    <input type="submit" value="Delete review" class="btn-danger">
+    <a href="/review/{{ review.id }}" class="btn-primary" style="text-decoration:none; display:inline-block; line-height:2.25rem; padding:0 14px;">Cancel</a>
+  </div>
 </form>
-&nbsp; <a href="/review/{{ review.id }}">Cancel</a>
 
 {% endblock %}

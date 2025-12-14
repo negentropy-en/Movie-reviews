@@ -88,3 +88,29 @@ nav li:not(:first-of-type) {
   background-color: #ffcccc;
   color: black;
 }
+
+.muted { color: #555; }
+.block { margin: 0.75em 0; }
+
+.form fieldset { border: 0; margin: 0 0 0.5em; padding: 0; }
+.form label { display: block; font-weight: bold; margin: 0 0 0.25em; }
+.form input[type="text"],
+.form input[type="password"],
+.form input[type="number"],
+.form textarea {
+  width: 100%;
+  border: 1px solid #ccc;
+  padding: 6px;
+}
+
+.btn-row { margin-top: 0.5em; }
+.btn-primary {
+  display: inline-block;
+  border: 1px solid black;
+  background: #ddd;
+  color: black;
+  padding: 6px 10px;
+  text-decoration: none;
+  cursor: pointer;
+}
+.btn-primary:hover { background: #ccc; }
